@@ -1,8 +1,16 @@
 .git/*
 env/
 venv/
+/vscode
+.vscode
 .venv
 .venv/
+
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover 
 
 __pycache__/
 *.py[cod]
@@ -17,6 +25,8 @@ __pycache__/
 
 static/
 posts/static/
+posts/media/
 media/
+sent_emails/
 
 db.sqlite3

@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Сообщение от {{ post.pub_date }}{% endblock %}
+{% block header %}Просмотр сообщения от {{ post.pub_date }}{% endblock %}
+{% block content %}
+  {% include 'post_item.html' with post=post author=post.author %}
+  {% include 'comments.html' with post=post comments=post.comments.all %}
+{% endblock %} 
