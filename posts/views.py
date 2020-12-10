@@ -119,15 +119,14 @@ def profile_follow(request, username):
        ):
         return redirect('profile', username)
     Follow.objects.create(user=request.user, author=author)
-    return render(request, "profile.html", {'author': author})
+    return redirect('profile', username)
 
 
 @login_required
 def profile_unfollow(request, username):
     author = get_object_or_404(User, username=username)
-    follow_remove = Follow.objects.get(author=author)
-    follow_remove.delete()
-    return render(request, "profile.html", {'author': author})
+    Follow.objects.filter(user=request.user, author=author).delete()
+    return redirect('profile', username)
 
 
 def page_not_found(request, exception):
