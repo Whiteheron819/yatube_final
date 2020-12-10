@@ -50,6 +50,7 @@ class Comment(models.Model):
     created = models.DateTimeField("date published", auto_now_add=True)
 
     class Meta(object):
+        ordering = ("-post",)
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
 

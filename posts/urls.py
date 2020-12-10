@@ -4,24 +4,24 @@ from . import views
 
 urlpatterns = [
     path(
-        "group/<slug:slug>/",
+        'group/<slug:slug>/',
         views.group_posts,
-        name="group_posts"
+        name='group_posts'
         ),
     path(
-        "group/",
+        'group/',
         views.groups,
-        name="allgroups"
+        name='allgroups'
         ),
     path(
-        "new/",
+        'new/',
         views.new_post,
-        name="new_post"
+        name='new_post'
         ),
     path(
-        "<str:username>/<int:post_id>/comment/",
+        '<str:username>/<int:post_id>/comment/',
         views.add_comment,
-        name="add_comment"
+        name='add_comment'
         ),
     path(
         '<str:username>/<int:post_id>/',
@@ -34,19 +34,19 @@ urlpatterns = [
         name='post_edit'
         ),
     path(
-        "<str:username>/follow/",
+        '<str:username>/follow/',
         views.profile_follow,
-        name="profile_follow"
+        name='profile_follow'
         ),
     path(
-        "<str:username>/unfollow/",
+        '<str:username>/unfollow/',
         views.profile_unfollow,
-        name="profile_unfollow"
+        name='profile_unfollow'
         ),
     path(
-        "follow/",
+        'follow/',
         views.follow_index,
-        name="follow_index"
+        name='follow_index'
         ),
     path(
         '<str:username>/',
@@ -54,8 +54,8 @@ urlpatterns = [
         name='profile'
         ),
     path(
-        "",
+        '',
         views.index,
-        name="index"
+        name='index'
         ),
 ]

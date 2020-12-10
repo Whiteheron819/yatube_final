@@ -5,7 +5,7 @@
 
     <p>{{ group.description }}</p>
     {% for post in page %}
-      {% include "post_item.html" with post=post %}
+      {% include "post_item.html" with post=post pg=True %}
     {% endfor %}
   {% if page.has_other_pages %}
     {% include "paginator.html" with items=page paginator=paginator%}
