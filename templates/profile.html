@@ -22,16 +22,16 @@
                 Подписан: {{ author.follower.count }}
               </div>
               <li class="list-group-item">
-                {% if following %}
+                {% if following and user.is_authenticated %}
                   <a class="btn btn-lg btn-light" 
                     href="{% url 'profile_unfollow' author.username %}" role="button">Отписаться                        
                   </a> 
-                {% else %}
+                {% elif user.is_authenticated %}
                   <a class="btn btn-lg btn-primary" 
                     href="{% url 'profile_follow' author.username %}" role="button">Подписаться               
                   </a>
                 {% endif %}
-              </li> 
+              </li>
             </li>
           <li class="list-group-item">
             <div class="h6 text-muted">                                                        

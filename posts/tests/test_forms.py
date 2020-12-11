@@ -93,16 +93,18 @@ class PostCreateFormTests(TestCase):
         comments_count = Comment.objects.count()
         form_data = {
             'text': 'Комментарий',
-            'post': self.post
             }
         response = self.authorized_client.post(
             self.NEW_COMMENT_URL,
             data=form_data,
             follow=True
             )
+        count_comments_response = response.context['comments'].count()
+        self.assertEqual(count_comments_response, 1)
         comment = response.context['comments'][0]
         self.assertEqual(comment.text, form_data['text'])
-        self.assertEqual(comment.post, form_data['post'])
+        self.assertEqual(comment.post, self.post)
+        self.assertEqual(comment.author, self.user)
         self.assertEqual(Comment.objects.count(), comments_count + 1)
         self.assertRedirects(response, self.VIEW_POST_URL)
 
@@ -150,7 +152,7 @@ class PostCreateFormTests(TestCase):
         на других пользователей."""
         count = Follow.objects.count()
         self.authorized_client.get(self.FOLLOW_URL)
-        follow = Follow.objects.get(user=self.user)
+        follow = Follow.objects.get(user=self.user, author=self.user2)
         self.assertEqual(count+1, Follow.objects.count())
         self.assertEqual(follow.author, self.user2)
 
@@ -161,4 +163,4 @@ class PostCreateFormTests(TestCase):
         Follow.objects.create(user=self.user, author=self.user2)
         self.assertEqual(count+1, Follow.objects.count())
         self.authorized_client.post(self.UNFOLLOW_URL)
-        self.assertEqual(count, Follow.objects.count())
+        self.assertFalse(Follow.objects.exists())
